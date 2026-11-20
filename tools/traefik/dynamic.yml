@@ -1,0 +1,17 @@
+http:
+  # Entry points define how Traefik listens for incoming requests.
+  routers:
+    # Tasknest router.
+    opsdeck:
+      rule: 'Host(`opsdeck.iv0ks.dev`)'
+      entryPoints:
+        - websecure
+      service: opsdeck
+      tls: { certResolver: namecheap }
+
+  # Services define how Traefik forwards requests to backend servers.
+  services:
+    opsdeck:
+      loadBalancer:
+        servers:
+          - url: 'http://host.docker.internal:3000/'
