@@ -1,0 +1,90 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+/*
+  opsdeck — "ops console" identity: near-black slate panels, hairline borders,
+  monospace type and status LEDs in green / amber / red. Colours are exposed as
+  shadcn/ui tokens so the components stay vanilla.
+*/
+:root {
+  --radius: 0.375rem;
+  --background: #0a0e13;
+  --foreground: #d5e1ee;
+  --card: #10161e;
+  --card-foreground: #d5e1ee;
+  --popover: #10161e;
+  --popover-foreground: #d5e1ee;
+  --primary: #3ddc84;
+  --primary-foreground: #04120a;
+  --secondary: #1a2330;
+  --secondary-foreground: #d5e1ee;
+  --muted: #151d28;
+  --muted-foreground: #7d8ea3;
+  --accent: #4cc9f0;
+  --accent-foreground: #03131a;
+  --warning: #ffb020;
+  --destructive: #ff5c5c;
+  --border: #223041;
+  --input: #2a3a4e;
+  --ring: #3ddc84;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-warning: var(--warning);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --font-mono:
+    ui-monospace, 'SF Mono', 'JetBrains Mono', 'Cascadia Code', Menlo, Consolas, monospace;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background font-mono text-sm text-foreground antialiased;
+    background-image:
+      linear-gradient(rgba(61, 220, 132, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(61, 220, 132, 0.035) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-sans font-semibold tracking-tight;
+  }
+}
+
+@keyframes led-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.led-pulse {
+  animation: led-pulse 1.6s ease-in-out infinite;
+}
