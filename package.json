@@ -1,0 +1,62 @@
+{
+  "name": "opsdeck",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Intentionally vulnerable operations dashboard to practice vertical privilege escalation (CWE-284).",
+  "type": "module",
+  "license": "MIT",
+  "author": "iv0ks",
+  "packageManager": "pnpm@12.3.4",
+  "engines": {
+    "node": ">=26"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && pnpm build:db",
+    "build:db": "esbuild src/db/migrate.ts src/db/seed.ts --bundle --platform=node --format=esm --target=node26 --outdir=dist/db --out-extension:.js=.mjs --banner:js=\"import { createRequire } from 'node:module'; const require = createRequire(import.meta.url);\"",
+    "start": "node .next/standalone/server.js",
+    "lint": "eslint . && prettier --check .",
+    "lint:fix": "eslint . --fix && prettier --write .",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx src/db/migrate.ts",
+    "db:seed": "tsx src/db/seed.ts",
+    "db:setup": "pnpm db:migrate && pnpm db:seed",
+    "prepare": "husky || true"
+  },
+  "dependencies": {
+    "@radix-ui/react-label": "2.1.17",
+    "@radix-ui/react-slot": "1.5.0",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "drizzle-orm": "0.45.4",
+    "lucide-react": "1.76.0",
+    "next": "16.4.6",
+    "postgres": "4.1.1",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "tailwind-merge": "3.7.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "21.2.4",
+    "@commitlint/config-conventional": "21.2.4",
+    "@eslint/js": "10.0.1",
+    "@tailwindcss/postcss": "4.3.5",
+    "@types/node": "26.6.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "drizzle-kit": "0.31.11",
+    "esbuild": "0.28.2",
+    "eslint": "10.14.0",
+    "eslint-config-next": "16.4.6",
+    "husky": "9.1.7",
+    "prettier": "3.10.1",
+    "tailwindcss": "4.3.5",
+    "tsx": "4.23.15",
+    "tw-animate-css": "1.4.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.72.2",
+    "vitest": "5.1.0"
+  }
+}
