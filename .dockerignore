@@ -1,0 +1,11 @@
+node_modules
+dist
+.next
+.git
+.github
+*.md
+.env
+tests
+tools
+.husky
+drizzle/.cache
